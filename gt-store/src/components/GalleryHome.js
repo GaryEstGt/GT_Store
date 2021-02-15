@@ -1,8 +1,6 @@
 import * as React from 'react';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import MobileStepper from '@material-ui/core/MobileStepper';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
@@ -21,12 +19,10 @@ const images = [
       'https://drive.google.com/uc?id=1eyLlctVD_swV9_f8jwruEsQsTgutSLTa',
   },
   {
-    label: 'Bali, Indonesia',
     imgPath:
       'https://drive.google.com/uc?id=163xi0nPr6WcbKEal6s_BAORDkS7Kb3cL',
   },
   {
-    label: 'Goč, Serbia',
     imgPath:
       'https://drive.google.com/uc?id=1YuczwK-uJyv6ofCtXfqGLKucZ0Z26VEO',
   },
@@ -36,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 1400,
     flexGrow: 1,
-    maxHeight: 500
+    maxHeight: 500,
   },
   img: {
     height: 500,
@@ -46,6 +42,9 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     float: 'center'
   },
+  steperr: {
+    background: '#ffffff',
+  }
 }));
 
 function SwipeableTextMobileStepper() {
@@ -78,12 +77,15 @@ function SwipeableTextMobileStepper() {
         {images.map((step, index) => (
           <div key={step.label}>
             {Math.abs(activeStep - index) <= 2 ? (
+                <div class="contenedor">
               <img className={classes.img} src={step.imgPath} alt={step.label}/>
+              </div>
             ) : null}
           </div>
         ))}
       </AutoPlaySwipeableViews>
       <MobileStepper
+         className={classes.steperr}
         steps={maxSteps}
         position="static"
         activeStep={activeStep}
