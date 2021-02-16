@@ -1,35 +1,43 @@
 import Menu from './Menu'
 import ListaCategoria from './ListaCategorias'
 import Productos from './Productos'
-import { makeStyles } from '@material-ui/core/styles'
+import Grid from '@material-ui/core/Grid'
 
-
-const useStyles = makeStyles({
-    productos: {
-      float: 'center',
-      marginLeft: 500,
-      display: 'inline-block',
-    },
-    categorias: {
-        float: 'left',
-        marginRight: 1000,
-        display: 'inline-block',
-      },
-  });
 
 function Category() {
-    const classes = useStyles();
   return (
     <div className="Category">
       <Menu/>
       <br/>
-      <div className={classes.productos}>
-        <Productos/>
-      </div>
-      <div className={classes.categorias}>
+      <Grid container spacing={3}>
+      <Grid item xs={3}>
         <ListaCategoria/>
-      </div>
-      
+      </Grid>
+      <Grid item xs={9}>
+      <table class="default">
+            <tr>
+                <td><Productos/></td>
+                <td><Productos/></td>
+                <td><Productos/></td>
+                <td><Productos/></td>
+            </tr>
+            <tr>
+                <td><Productos/></td>
+                <td><Productos/></td>
+                <td><Productos/></td>
+                <td><Productos/></td>
+            </tr>
+            <tr>
+
+                <td><Productos/></td>
+                <td><Productos/></td>
+                <td><Productos/></td>
+                <td><Productos/></td>
+
+            </tr>
+        </table>
+      </Grid>
+      </Grid>   
     </div>
   );
 }

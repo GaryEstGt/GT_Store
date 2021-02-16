@@ -25,6 +25,11 @@ const useStyles = makeStyles((theme) => ({
       outline: 'none',
       color: 'white',
   },
+  login:{
+    textDecoration: 'none',
+    outline: 'none',
+    color: 'black',
+},
 
   
 }));
@@ -47,8 +52,12 @@ export default function ButtonAppBar() {
             <Button color="inherit" className={classes.root} size="large">
                 <Link to="/category" className={classes.linki}>CATEGORÍAS</Link>
             </Button>
-            <Button color="inherit" className={classes.root} size="large">CÓNOCENOS</Button>
-            <Button color="inherit" className={classes.root} size="large">CONTÁCTANOS</Button>
+            <Button color="inherit" className={classes.root} size="large">
+                <Link to="/conocenos" className={classes.linki}>CÓNOCENOS</Link>
+            </Button>
+            <Button color="inherit" className={classes.root} size="large">
+                <Link to="/contacto" className={classes.linki}>CONTÁCTANOS</Link>
+            </Button>
             <Button
                 variant="contained"
                 color="default"
@@ -56,7 +65,7 @@ export default function ButtonAppBar() {
                 size="large"
                 startIcon={<AccountCircleIcon />}
             >
-                LOG IN
+                <Link to="/login" className={classes.login}>LOG IN</Link>
             </Button>
         </Toolbar>
       </AppBar>
