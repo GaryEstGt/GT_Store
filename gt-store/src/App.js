@@ -4,6 +4,8 @@ import Category from './components/Category'
 import Conocenos from './components/Conocenos'
 import Contacto from './components/Contacto'
 import Login from './components/Login'
+import Homeadm from './components/Home_adm'
+import AdminProds from './components/Admin_Productos'
 import {
   BrowserRouter as Router,
   Switch,
@@ -26,6 +28,12 @@ function App() {
           <Route path="/login">
             <Login />
           </Route>
+          <Route path="/home-adm">
+            <Homeadm />
+          </Route> 
+          <Route path="/adm-prod">
+            <AdminProds />
+          </Route>          
           <Route path="/">
             <Home />
           </Route>
