@@ -6,6 +6,7 @@ import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import * as React from 'react';
 import { DataGrid } from '@material-ui/data-grid';
 import DeleteIcon from '@material-ui/icons/Delete';
+import Producto from './Producto.json'
 import {
     Link
   } from "react-router-dom";
@@ -28,41 +29,29 @@ const useStyles = makeStyles((theme) => ({
 
   const columns = [
     { field: 'id', headerName: 'ID', width: 70 },
-    { field: 'firstName', headerName: 'First name', width: 130 },
-    { field: 'lastName', headerName: 'Last name', width: 130 },
+    { field: 'Nombre', headerName: 'Nombre', width: 130 },
+    { field: 'Precio', headerName: 'Precio',  type: 'decimal', width: 130 },
     {
-      field: 'age',
-      headerName: 'Age',
-      type: 'number',
-      width: 90,
+      field: 'Categoria',
+      headerName: 'Categoria',
+      width: 130,
     },
     {
-      field: 'fullName',
-      headerName: 'Full name',
+      field: 'Descripcion',
+      headerName: 'Descripcion',
       description: 'This column has a value getter and is not sortable.',
       sortable: false,
       width: 160,
-      valueGetter: (params) =>
-        `${params.getValue('firstName') || ''} ${params.getValue('lastName') || ''}`,
     },
   ];
   
-  const rows = [
-    { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
-    { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
-    { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
-    { id: 4, lastName: 'Stark', firstName: 'Arya', age: 16 },
-    { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: null },
-    { id: 6, lastName: 'Melisandre', firstName: null, age: 150 },
-    { id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
-    { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
-    { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
-  ];
+  const rows = Producto;
   
   
   
 function Admin_Productos() {
     const classes = useStyles();
+    const [selectionModel, setSelectionModel] = React.useState([]);
   return (
     <div>
       <Menuadm/>
@@ -74,13 +63,23 @@ function Admin_Productos() {
                 className={classes.button}
                 size="large"
                 startIcon={<AddCircleOutlineIcon />}
+                onClick={()=>console.log(selectionModel)}
             >
-                <Link to="/" className={classes.linki}>Agregar Producto</Link>
+                Agregar Producto
             </Button>
         <br/>
         <br/>
+        <h1>{selectionModel.map((val)=>val.Nombre)}</h1>
             <div style={{ height: 400, width: 1000 }}>
-                <DataGrid rows={rows} columns={columns} pageSize={5} checkboxSelection />
+                <DataGrid 
+                rows={rows} 
+                columns={columns} 
+                pageSize={5} 
+                checkboxSelection
+                onSelectionChange={(newSelection) => {
+                    setSelectionModel(newSelection.rows);
+                 }}
+                  />
             </div>
         </div>
     </div>
