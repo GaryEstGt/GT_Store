@@ -6,6 +6,7 @@ import Contacto from './components/Contacto'
 import Login from './components/Login'
 import Homeadm from './components/Home_adm'
 import AdminProds from './components/Admin_Productos'
+import Nuevo from './components/NuevoProducto'
 import {
   BrowserRouter as Router,
   Switch,
@@ -33,6 +34,9 @@ function App() {
           </Route> 
           <Route path="/adm-prod">
             <AdminProds />
+          </Route>  
+          <Route path="/nuevo">
+            <Nuevo />
           </Route>          
           <Route path="/">
             <Home />

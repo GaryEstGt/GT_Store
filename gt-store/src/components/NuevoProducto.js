@@ -1,11 +1,10 @@
-import Menu from './Menu'
+import Menu from './Menu_adm'
 import { makeStyles} from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Producto from './Producto.json';
-import {
-  Link
-} from "react-router-dom";
+import * as React from 'react';
+import  { Redirect } from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
     texto: {
@@ -24,31 +23,41 @@ const useStyles = makeStyles((theme) => ({
   },
   }));
 
-  function agregar() {
-    const nuevoProd=Producto
-    Producto.id=1
-
-  }
 
 function Nuevo() {
       const classes = useStyles();
-  return (
+      const [name, setName] = React.useState("");
+      const [precio, setPrecio] = React.useState(0);
+      const [categoria, setCategoria] = React.useState("");
+      const [descripcion, setDescripcion] = React.useState("");
+    const enviar = ()=>{
+        const nuevoProd=Producto
+        nuevoProd[0].id=1
+        nuevoProd[0].Nombre=name
+        nuevoProd[0].Precio=precio
+        nuevoProd[0].Categoria=categoria
+        nuevoProd[0].Descripcion=descripcion
+        alert(nuevoProd.map((value)=>value.Nombre))
+        localStorage.setItem(1,nuevoProd)
+
+    }
+      return (
     <div>
       <Menu/>
       <br/>
       <div className={classes.texto}>
       <h1>Agregar Producto</h1>
         <form className={classes.root} noValidate autoComplete="off">
-            <TextField id="outlined-basic" label="Usuario" ref="nombre" variant="outlined" />
+            <TextField id="outlined-basic" label="Nombre" value={name} onChange={e => setName(e.target.value)} variant="outlined" />
             <br/>
-            <TextField id="outlined-basic" label="Precio" ref="precio" variant="outlined" />
+            <TextField id="outlined-basic" label="Precio" value={precio} onChange={e => setPrecio(e.target.value)} variant="outlined" />
             <br/>
-            <TextField id="outlined-basic" label="Categoria" ref="categoria" variant="outlined" />
+            <TextField id="outlined-basic" label="Categoria" value={categoria} onChange={e => setCategoria(e.target.value)} variant="outlined" />
             <br/>
-            <TextField id="outlined-basic" label="Descripcion" ref="descripcion" variant="outlined" />
+            <TextField id="outlined-basic" label="Descripcion" value={descripcion} onChange={e => setDescripcion(e.target.value)} variant="outlined" />
             <br/>
-        <Button variant="contained" color="primary">
-          <Link to="/home-adm" className={classes.linki}>Iniciar Sesión</Link>
+        <Button variant="contained" color="primary" onClick={enviar}>
+          Enviar
         </Button>
         </form>
       </div>

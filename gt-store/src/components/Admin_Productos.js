@@ -45,7 +45,16 @@ const useStyles = makeStyles((theme) => ({
     },
   ];
   
-  const rows = Producto;
+  const Nuevo = JSON.parse(localStorage.getItem(1))
+  var rows=[];
+  if(Nuevo!=null){
+  const NuevoProducto=Producto.concat(Nuevo)
+   rows = NuevoProducto;
+}else
+{
+     rows=Producto;
+}
+  
   
   
   
@@ -65,7 +74,7 @@ function Admin_Productos() {
                 startIcon={<AddCircleOutlineIcon />}
                 onClick={()=>console.log(selectionModel)}
             >
-                Agregar Producto
+                <Link to="/nuevo" className={classes.linki}>Agregar Producto</Link>
             </Button>
         <br/>
         <br/>
