@@ -32,7 +32,7 @@ export default function MediaCard() {
           Laptop HP 15
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            Laptop HP 15 para trabajo.
+            Q15000
           </Typography>
         </CardContent>
       </CardActionArea>

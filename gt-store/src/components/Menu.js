@@ -13,9 +13,14 @@ import {
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    width:"auto"
   },
   menuButton: {
     marginRight: theme.spacing(2),
+  },
+  boton: {
+    flexGrow: 1,
+    width:"auto",
   },
   title: {
     flexGrow: 1,
@@ -29,6 +34,7 @@ const useStyles = makeStyles((theme) => ({
     textDecoration: 'none',
     outline: 'none',
     color: 'black',
+    marginLeft: "auto"
 },
 
   
@@ -46,27 +52,37 @@ export default function ButtonAppBar() {
           <Typography variant="h6" className={classes.menuButton}>
                 GT STORE
             </Typography>
-            <Button color="inherit" className={classes.root} size="large">
-                <Link to="/" className={classes.linki}>HOME</Link>
+            <Link to="/" className={classes.linki}>
+            <Button color="inherit" className={classes.boton} size="large">
+                HOME
             </Button>
-            <Button color="inherit" className={classes.root} size="large">
-                <Link to="/category" className={classes.linki}>CATEGORÍAS</Link>
-            </Button>
-            <Button color="inherit" className={classes.root} size="large">
-                <Link to="/conocenos" className={classes.linki}>CÓNOCENOS</Link>
-            </Button>
-            <Button color="inherit" className={classes.root} size="large">
-                <Link to="/contacto" className={classes.linki}>CONTÁCTANOS</Link>
-            </Button>
-            <Button
+            </Link>
+            <Link to="/category" className={classes.linki}> 
+              <Button color="inherit" className={classes.boton} size="large">
+                CATEGORÍAS
+              </Button>
+            </Link>
+            <Link to="/conocenos" className={classes.linki}>
+              <Button color="inherit" className={classes.boton} size="large">
+                CÓNOCENOS
+              </Button>
+            </Link>
+            <Link to="/contacto" className={classes.linki}>
+              <Button color="inherit" className={classes.boton} size="large">
+                CONTÁCTANOS
+              </Button>
+            </Link>
+            <Link to="/login" className={classes.login}>
+              <Button
                 variant="contained"
                 color="default"
                 className={classes.button}
                 size="large"
                 startIcon={<AccountCircleIcon />}
-            >
-                <Link to="/login" className={classes.login}>LOG IN</Link>
+              >
+                LOG IN
             </Button>
+            </Link>
         </Toolbar>
       </AppBar>
     </div>

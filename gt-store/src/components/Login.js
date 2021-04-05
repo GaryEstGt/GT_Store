@@ -8,18 +8,22 @@ import {
 
 const useStyles = makeStyles((theme) => ({
     texto: {
-      marginLeft: 500,
+    marginLeft:425
     },
     root: {
         '& > *': {
           margin: theme.spacing(1),
-          width: '50ch',
+          width: 450,
         },
     },
     linki:{
       textDecoration: 'none',
       outline: 'none',
       color: 'white',
+  },
+  boton: {
+    flexGrow: 1,
+    width: 450,
   },
   }));
 function Login() {
@@ -41,9 +45,11 @@ function Login() {
                 variant="outlined"
         />
             <br/>
-        <Button variant="contained" color="primary">
-          <Link to="/home-adm" className={classes.linki}>Iniciar Sesión</Link>
-        </Button>
+            <Link to="/home-adm" className={classes.linki}>
+              <Button variant="contained" color="primary" className={classes.boton}>
+                Iniciar Sesión
+              </Button>
+            </Link>
         </form>
       </div>
     </div>

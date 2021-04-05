@@ -1,12 +1,13 @@
 import Menuadm from './Menu_adm'
 import Button from '@material-ui/core/Button';
+import BorderColorIcon from '@material-ui/icons/BorderColor';
 import IconButton from '@material-ui/core/IconButton';
 import { makeStyles } from '@material-ui/core/styles';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import * as React from 'react';
 import { DataGrid } from '@material-ui/data-grid';
 import DeleteIcon from '@material-ui/icons/Delete';
-import Producto from './Producto.json'
+import VisibilityIcon from '@material-ui/icons/Visibility';
 import {
     Link
   } from "react-router-dom";
@@ -41,19 +42,46 @@ const useStyles = makeStyles((theme) => ({
       headerName: 'Descripcion',
       description: 'This column has a value getter and is not sortable.',
       sortable: false,
-      width: 160,
+      width: 300,
+    }, 
+    {
+      field: ' ',
+      headerName: '',
+      width: 230,
+      sortable: false,
+      renderCell: (params) => (
+        <strong>
+        <Link to="/verproducto">
+        <IconButton aria-label="view" onClick={()=>console.log(params.getValue('id'))}>        
+          <VisibilityIcon />  
+        </IconButton>
+        </Link> 
+        <Link to="/editar">
+         <IconButton aria-label="edit">
+         <BorderColorIcon />
+        </IconButton>
+        </Link>
+        <IconButton aria-label="delete" onClick={()=>alert('Producto Eliminado')} >
+         <DeleteIcon />
+        </IconButton>
+        </strong>
+      ),
     },
   ];
-  
-  const Nuevo = JSON.parse(localStorage.getItem(1))
-  var rows=[];
-  if(Nuevo!=null){
-  const NuevoProducto=Producto.concat(Nuevo)
-   rows = NuevoProducto;
-}else
-{
-     rows=Producto;
-}
+  console.log(localStorage.getItem(1))
+  const rows=[{id:1,Nombre:'Laptop HP',Precio:2500, Categoria: 'Laptop',Descripcion:'8GB RAM 512 GB HDD'},
+            {id:2,Nombre:'Laptop DELL',Precio:2500, Categoria: 'Laptop',Descripcion:'8GB RAM 512 GB HDD'},
+            {id:3,Nombre:'Laptop Lenovo',Precio:2500, Categoria: 'Laptop',Descripcion:'8GB RAM 512 GB HDD'},
+            {id:4,Nombre:'Laptop Toshiba',Precio:2500, Categoria: 'Laptop',Descripcion:'8GB RAM 512 GB HDD'},
+            {id:5,Nombre:'Laptop Acer',Precio:2500, Categoria: 'Laptop',Descripcion:'8GB RAM 512 GB HDD'},
+            {id:6,Nombre:'Laptop Alien',Precio:2500, Categoria: 'Laptop',Descripcion:'8GB RAM 512 GB HDD'},
+            {id:7,Nombre:'Laptop HP',Precio:2500, Categoria: 'Laptop',Descripcion:'8GB RAM 512 GB HDD'},
+            {id:8,Nombre:'Laptop DELL',Precio:2500, Categoria: 'Laptop',Descripcion:'8GB RAM 512 GB HDD'},
+            {id:9,Nombre:'Laptop Lenovo',Precio:2500, Categoria: 'Laptop',Descripcion:'8GB RAM 512 GB HDD'},
+            {id:10,Nombre:'Laptop Acer',Precio:2500, Categoria: 'Laptop',Descripcion:'8GB RAM 512 GB HDD'},
+            {id:11,Nombre:'Laptop Toshiba',Precio:2500, Categoria: 'Laptop',Descripcion:'8GB RAM 512 GB HDD'},
+            {id:12,Nombre:'Laptop HP',Precio:2500, Categoria: 'Laptop',Descripcion:'8GB RAM 512 GB HDD'}
+]
   
   
   
@@ -66,7 +94,8 @@ function Admin_Productos() {
       <Menuadm/>
       <br/>
       <div className={classes.contenedor}>
-      <Button
+      <Link to="/nuevo" className={classes.linki}>
+        <Button
                 variant="contained"
                 color="primary"
                 className={classes.button}
@@ -74,20 +103,17 @@ function Admin_Productos() {
                 startIcon={<AddCircleOutlineIcon />}
                 onClick={()=>console.log(selectionModel)}
             >
-                <Link to="/nuevo" className={classes.linki}>Agregar Producto</Link>
+                Agregar Producto
             </Button>
+        </Link>
         <br/>
         <br/>
-        <h1>{selectionModel.map((val)=>val.Nombre)}</h1>
-            <div style={{ height: 400, width: 1000 }}>
+            <div style={{ height: 450, width: 1000 }}>
                 <DataGrid 
                 rows={rows} 
                 columns={columns} 
-                pageSize={5} 
-                checkboxSelection
-                onSelectionChange={(newSelection) => {
-                    setSelectionModel(newSelection.rows);
-                 }}
+                pageSize={10} 
+                Button
                   />
             </div>
         </div>

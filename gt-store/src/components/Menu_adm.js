@@ -13,6 +13,11 @@ import {
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    width:"auto",
+  },
+  boton: {
+    flexGrow: 1,
+    width:"auto",
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -29,6 +34,8 @@ const useStyles = makeStyles((theme) => ({
     textDecoration: 'none',
     outline: 'none',
     color: 'black',
+    width:"auto",
+    marginLeft:"auto"
 },
 
   
@@ -46,21 +53,27 @@ export default function ButtonAppBar() {
           <Typography variant="h6" className={classes.menuButton}>
                 GT STORE
             </Typography>
-            <Button color="inherit" className={classes.root} size="large">
-                <Link to="/home-adm" className={classes.linki}>HOME</Link>
-            </Button>
-            <Button color="inherit" className={classes.root} size="large">
-                <Link to="/adm-prod" className={classes.linki}>Administración de Productos</Link>
-            </Button>
-            <Button
+            <Link to="/home-adm" className={classes.linki}>
+              <Button color="inherit" className={classes.boton} size="large">
+                HOME
+              </Button>
+            </Link>
+            <Link to="/adm-prod" className={classes.linki}>
+              <Button color="inherit" className={classes.boton} size="large">
+                Administración de Productos
+              </Button>
+            </Link>
+            <Link to="/" className={classes.login}>
+              <Button
                 variant="contained"
                 color="default"
                 className={classes.button}
                 size="large"
                 startIcon={<AccountCircleIcon />}
-            >
-                <Link to="/" className={classes.login}>LOG OUT</Link>
-            </Button>
+              >
+               LOG OUT
+              </Button>
+            </Link>
         </Toolbar>
       </AppBar>
     </div>

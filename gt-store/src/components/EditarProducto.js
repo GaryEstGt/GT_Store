@@ -29,21 +29,14 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 
-function Nuevo() {
+function Editar() {
       const classes = useStyles();
       const [name, setName] = React.useState("");
       const [precio, setPrecio] = React.useState(0);
       const [categoria, setCategoria] = React.useState("");
       const [descripcion, setDescripcion] = React.useState("");
     const enviar = ()=>{
-        var nuevoProd=new Object()
-        nuevoProd.id=Math.random()*100
-        nuevoProd.Nombre=name
-        nuevoProd.Precio=precio
-        nuevoProd.Categoria=categoria
-        nuevoProd.Descripcion=descripcion
-        alert(nuevoProd.map((value)=>value.Nombre))
-        localStorage.setItem(1,nuevoProd)
+        
 
     }
       return (
@@ -56,7 +49,7 @@ function Nuevo() {
         </Button>
     </Link>
       <div className={classes.texto}>
-      <h1>Agregar Producto</h1>
+      <h1>Editar Producto</h1>
         <form className={classes.root} noValidate autoComplete="off">
             <TextField id="outlined-basic" label="Nombre" value={name} onChange={e => setName(e.target.value)} variant="outlined" />
             <br/>
@@ -75,4 +68,4 @@ function Nuevo() {
   );
 }
 
-export default Nuevo;
+export default Editar;

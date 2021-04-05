@@ -2,6 +2,7 @@ import Menu from './Menu'
 import { makeStyles} from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import { Formik } from "formik";
 
 const useStyles = makeStyles((theme) => ({
     texto: {
@@ -42,6 +43,9 @@ function Contacto() {
             Enviar
         </Button>
         </form>
+        <h3>¿Necesitas contactarnos ya?</h3>
+        <h4>Correo electrónico: gtstore@store.com</h4>
+        <h4>Whatsapp: 90909090</h4>
       </div>
     </div>
   );
