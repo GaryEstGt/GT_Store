@@ -4,6 +4,10 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import * as React from 'react';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';
+
+
 import {
     Link
   } from "react-router-dom";
@@ -25,7 +29,14 @@ const useStyles = makeStyles((theme) => ({
   },
   regresar:{
       marginLeft:10,
-  }
+  },
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2),
+  },
   }));
 
 
@@ -36,14 +47,7 @@ function Nuevo() {
       const [categoria, setCategoria] = React.useState("");
       const [descripcion, setDescripcion] = React.useState("");
     const enviar = ()=>{
-        var nuevoProd=new Object()
-        nuevoProd.id=Math.random()*100
-        nuevoProd.Nombre=name
-        nuevoProd.Precio=precio
-        nuevoProd.Categoria=categoria
-        nuevoProd.Descripcion=descripcion
-        alert(nuevoProd.map((value)=>value.Nombre))
-        localStorage.setItem(1,nuevoProd)
+      console.log(categoria)
 
     }
       return (
@@ -62,7 +66,17 @@ function Nuevo() {
             <br/>
             <TextField id="outlined-basic" label="Precio" value={precio} onChange={e => setPrecio(e.target.value)} variant="outlined" />
             <br/>
-            <TextField id="outlined-basic" label="Categoria" value={categoria} onChange={e => setCategoria(e.target.value)} variant="outlined" />
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={categoria}
+              onChange={e => setCategoria(e.target.value)}
+            >
+             <MenuItem value={"Laptop"}>Laptop</MenuItem>
+              <MenuItem value={"Smartphone"}>Smartphone</MenuItem>
+              <MenuItem value={"Perifericos"}>Perifericos</MenuItem>
+              <MenuItem value={"Cableado"}>Cableado</MenuItem>
+            </Select>
             <br/>
             <TextField id="outlined-basic" label="Descripcion" value={descripcion} onChange={e => setDescripcion(e.target.value)} variant="outlined" />
             <br/>

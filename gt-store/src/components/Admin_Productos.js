@@ -29,30 +29,31 @@ const useStyles = makeStyles((theme) => ({
   }));
 
   const columns = [
-    { field: 'id', headerName: 'ID', width: 70 },
-    { field: 'Nombre', headerName: 'Nombre', width: 130 },
-    { field: 'Precio', headerName: 'Precio',  type: 'decimal', width: 130 },
+    { field: '_id', headerName: 'ID', width: 120 , hide:true},
+    { field: 'Cod_prod', headerName: 'Codigo', width: 150 },
+    { field: 'product_name', headerName: 'Nombre', width: 130 },
+    { field: 'product_price', headerName: 'Precio',  type: 'decimal', width: 130 },
     {
-      field: 'Categoria',
+      field: 'product_type',
       headerName: 'Categoria',
       width: 130,
     },
     {
-      field: 'Descripcion',
+      field: 'product_desc',
       headerName: 'Descripcion',
       description: 'This column has a value getter and is not sortable.',
       sortable: false,
-      width: 300,
+      width: 250,
     }, 
     {
       field: ' ',
       headerName: '',
-      width: 230,
+      width: 200,
       sortable: false,
       renderCell: (params) => (
         <strong>
         <Link to="/verproducto">
-        <IconButton aria-label="view" onClick={()=>console.log(params.getValue('id'))}>        
+        <IconButton aria-label="view" onClick={()=>console.log(params.getValue('_id'))}>        
           <VisibilityIcon />  
         </IconButton>
         </Link> 
@@ -69,18 +70,17 @@ const useStyles = makeStyles((theme) => ({
     },
   ];
   console.log(localStorage.getItem(1))
-  const rows=[{id:1,Nombre:'Laptop HP',Precio:2500, Categoria: 'Laptop',Descripcion:'8GB RAM 512 GB HDD'},
-            {id:2,Nombre:'Laptop DELL',Precio:2500, Categoria: 'Laptop',Descripcion:'8GB RAM 512 GB HDD'},
-            {id:3,Nombre:'Laptop Lenovo',Precio:2500, Categoria: 'Laptop',Descripcion:'8GB RAM 512 GB HDD'},
-            {id:4,Nombre:'Laptop Toshiba',Precio:2500, Categoria: 'Laptop',Descripcion:'8GB RAM 512 GB HDD'},
-            {id:5,Nombre:'Laptop Acer',Precio:2500, Categoria: 'Laptop',Descripcion:'8GB RAM 512 GB HDD'},
-            {id:6,Nombre:'Laptop Alien',Precio:2500, Categoria: 'Laptop',Descripcion:'8GB RAM 512 GB HDD'},
-            {id:7,Nombre:'Laptop HP',Precio:2500, Categoria: 'Laptop',Descripcion:'8GB RAM 512 GB HDD'},
-            {id:8,Nombre:'Laptop DELL',Precio:2500, Categoria: 'Laptop',Descripcion:'8GB RAM 512 GB HDD'},
-            {id:9,Nombre:'Laptop Lenovo',Precio:2500, Categoria: 'Laptop',Descripcion:'8GB RAM 512 GB HDD'},
-            {id:10,Nombre:'Laptop Acer',Precio:2500, Categoria: 'Laptop',Descripcion:'8GB RAM 512 GB HDD'},
-            {id:11,Nombre:'Laptop Toshiba',Precio:2500, Categoria: 'Laptop',Descripcion:'8GB RAM 512 GB HDD'},
-            {id:12,Nombre:'Laptop HP',Precio:2500, Categoria: 'Laptop',Descripcion:'8GB RAM 512 GB HDD'}
+  const rows=[{_id:'6051704f353f6a08e8877442',Cod_prod:'COD001',product_name:'Laptop HP',product_price:2500, product_type: 'Laptop',product_desc:'8GB RAM 512 GB HDD'},
+            {_id:'6051704f353f6a08e8877441',Cod_prod:'COD001',product_name:'Laptop DELL',product_price:2500, product_type: 'Laptop',product_desc:'8GB RAM 512 GB HDD'},
+            {_id:'6051704f353f6a08e8877443',Cod_prod:'COD001',product_name:'Laptop Lenovo',product_price:2500, product_type: 'Laptop',product_desc:'8GB RAM 512 GB HDD'},
+            {_id:'6051704f353f6a08e8877444', Cod_prod:'COD001',product_name:'Laptop Toshiba',product_price:2500, product_type: 'Laptop',product_desc:'8GB RAM 512 GB HDD'},
+            {_id:'6051704f353f6a08e8877445', Cod_prod:'COD001',product_name:'Laptop Acer',product_price:2500, product_type: 'Laptop',product_desc:'8GB RAM 512 GB HDD'},
+            {_id:'6051704f353f6a08e8877446', Cod_prod:'COD001',product_name:'Laptop Alien',product_price:2500, product_type: 'Laptop',product_desc:'8GB RAM 512 GB HDD'},
+            {_id:'6051704f353f6a08e8877447',Cod_prod:'COD001',product_name:'Laptop HP',product_price:2500, product_type: 'Laptop',product_desc:'8GB RAM 512 GB HDD'},
+            {_id:'6051704f353f6a08e8877449',Cod_prod:'COD001',product_name:'Laptop Lenovo',product_price:2500, product_type: 'Laptop',product_desc:'8GB RAM 512 GB HDD'},
+            {_id:'6051704f353f6a08e8877451',Cod_prod:'COD001',product_name:'Laptop Acer',product_price:2500, product_type: 'Laptop',product_desc:'8GB RAM 512 GB HDD'},
+            {_id:'6051704f353f6a08e8877452',Cod_prod:'COD001',product_name:'Laptop Toshiba',product_price:2500, product_type: 'Laptop',product_desc:'8GB RAM 512 GB HDD'},
+            {_id:'6051704f353f6a08e8877453',Cod_prod:'COD001',product_name:'Laptop HP',product_price:2500, product_type: 'Laptop',product_desc:'8GB RAM 512 GB HDD'}
 ]
   
   
@@ -108,12 +108,13 @@ function Admin_Productos() {
         </Link>
         <br/>
         <br/>
-            <div style={{ height: 450, width: 1000 }}>
+            <div style={{ height: 450, width: 1100 }}>
                 <DataGrid 
                 rows={rows} 
                 columns={columns} 
                 pageSize={10} 
                 Button
+                getRowId={(_id) => _id._id}
                   />
             </div>
         </div>
