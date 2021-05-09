@@ -1,17 +1,19 @@
-import Menu from './Menu'
+import MenuR from './MenuR'
 import { makeStyles} from '@material-ui/core/styles';
 
 
 const useStyles = makeStyles((theme) => ({
     texto: {
-      marginLeft: 100,
+      marginLeft: "15%",
     },
   }));
 function Conocenos() {
       const classes = useStyles();
   return (
     <div>
-      <Menu/>
+      <MenuR/>
+      <br/>
+      <br/>
       <br/>
       <div className={classes.texto}>
       <h1>¡Conócenos!</h1>
@@ -27,9 +29,9 @@ function Conocenos() {
       <p>
           En esta página puedes visualizar todos los productos que vendemos, esta página aun está en construcción.
       </p>
-      <p>
+
           <h3>¡Pronto podrás comprar nuestros productos online!</h3>
-      </p>
+
       </div>
     </div>
   );

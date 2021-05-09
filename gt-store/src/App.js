@@ -1,4 +1,5 @@
 import './App.css';
+import * as React from 'react';
 import Home from './components/Home'
 import Category from './components/Category'
 import VerProducto from './components/VerProducto'
@@ -16,6 +17,7 @@ import {
 } from "react-router-dom";
 
 function App() {
+  const [autenticado, setAutenticado] = React.useState([]);
   return (
     <Router>
       <Switch>
@@ -37,7 +39,7 @@ function App() {
           <Route path="/login">
             <Login />
           </Route>
-          <Route path="/home-adm">
+          <Route path="/home-adm" >
             <Homeadm />
           </Route> 
           <Route path="/adm-prod">
@@ -45,7 +47,7 @@ function App() {
           </Route>  
           <Route path="/nuevo">
             <Nuevo />
-          </Route>          
+          </Route>        
           <Route path="/">
             <Home />
           </Route>

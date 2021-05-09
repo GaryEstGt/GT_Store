@@ -8,6 +8,8 @@ import * as React from 'react';
 import { DataGrid } from '@material-ui/data-grid';
 import DeleteIcon from '@material-ui/icons/Delete';
 import VisibilityIcon from '@material-ui/icons/Visibility';
+import axios from 'axios';
+import {useEffect } from 'react';
 import {
     Link
   } from "react-router-dom";
@@ -28,6 +30,20 @@ const useStyles = makeStyles((theme) => ({
       },
   }));
 
+  function redirVista(parametro){
+    window.location.href = `/verproducto?id=${parametro}`;
+  }
+  function redirEditar(parametro){
+    window.location.href = `/editar?id=${parametro}`;
+  }
+  function eliminarProducto(parametro){
+    axios.delete('http://EC2Co-EcsEl-5OOEYFX1RC2G-22735838.us-east-2.elb.amazonaws.com:4200/eliminar?id='+parametro).then(result=>{
+      console.log(result.data)
+      alert('Producto eliminado')
+      window.location.href = '/adm-prod';
+    }      
+    ).catch(console.log)
+  }
   const columns = [
     { field: '_id', headerName: 'ID', width: 120 , hide:true},
     { field: 'Cod_prod', headerName: 'Codigo', width: 150 },
@@ -52,36 +68,21 @@ const useStyles = makeStyles((theme) => ({
       sortable: false,
       renderCell: (params) => (
         <strong>
-        <Link to="/verproducto">
-        <IconButton aria-label="view" onClick={()=>console.log(params.getValue('_id'))}>        
+        <IconButton aria-label="view" onClick={()=>redirVista(params.getValue('_id'))}>        
           <VisibilityIcon />  
         </IconButton>
-        </Link> 
         <Link to="/editar">
-         <IconButton aria-label="edit">
+         <IconButton aria-label="edit" onClick={()=>redirEditar(params.getValue('_id'))}>
          <BorderColorIcon />
         </IconButton>
         </Link>
-        <IconButton aria-label="delete" onClick={()=>alert('Producto Eliminado')} >
+        <IconButton aria-label="delete" onClick={()=>eliminarProducto(params.getValue('_id'))} >
          <DeleteIcon />
         </IconButton>
         </strong>
       ),
     },
   ];
-  console.log(localStorage.getItem(1))
-  const rows=[{_id:'6051704f353f6a08e8877442',Cod_prod:'COD001',product_name:'Laptop HP',product_price:2500, product_type: 'Laptop',product_desc:'8GB RAM 512 GB HDD'},
-            {_id:'6051704f353f6a08e8877441',Cod_prod:'COD001',product_name:'Laptop DELL',product_price:2500, product_type: 'Laptop',product_desc:'8GB RAM 512 GB HDD'},
-            {_id:'6051704f353f6a08e8877443',Cod_prod:'COD001',product_name:'Laptop Lenovo',product_price:2500, product_type: 'Laptop',product_desc:'8GB RAM 512 GB HDD'},
-            {_id:'6051704f353f6a08e8877444', Cod_prod:'COD001',product_name:'Laptop Toshiba',product_price:2500, product_type: 'Laptop',product_desc:'8GB RAM 512 GB HDD'},
-            {_id:'6051704f353f6a08e8877445', Cod_prod:'COD001',product_name:'Laptop Acer',product_price:2500, product_type: 'Laptop',product_desc:'8GB RAM 512 GB HDD'},
-            {_id:'6051704f353f6a08e8877446', Cod_prod:'COD001',product_name:'Laptop Alien',product_price:2500, product_type: 'Laptop',product_desc:'8GB RAM 512 GB HDD'},
-            {_id:'6051704f353f6a08e8877447',Cod_prod:'COD001',product_name:'Laptop HP',product_price:2500, product_type: 'Laptop',product_desc:'8GB RAM 512 GB HDD'},
-            {_id:'6051704f353f6a08e8877449',Cod_prod:'COD001',product_name:'Laptop Lenovo',product_price:2500, product_type: 'Laptop',product_desc:'8GB RAM 512 GB HDD'},
-            {_id:'6051704f353f6a08e8877451',Cod_prod:'COD001',product_name:'Laptop Acer',product_price:2500, product_type: 'Laptop',product_desc:'8GB RAM 512 GB HDD'},
-            {_id:'6051704f353f6a08e8877452',Cod_prod:'COD001',product_name:'Laptop Toshiba',product_price:2500, product_type: 'Laptop',product_desc:'8GB RAM 512 GB HDD'},
-            {_id:'6051704f353f6a08e8877453',Cod_prod:'COD001',product_name:'Laptop HP',product_price:2500, product_type: 'Laptop',product_desc:'8GB RAM 512 GB HDD'}
-]
   
   
   
@@ -89,9 +90,34 @@ const useStyles = makeStyles((theme) => ({
 function Admin_Productos() {
     const classes = useStyles();
     const [selectionModel, setSelectionModel] = React.useState([]);
+    const [productos, setProductos] = React.useState([]);
+    useEffect(() => {
+      // Extrae productos desde la API
+      const token=localStorage.getItem('token')
+      console.log(token)
+      const data = new URLSearchParams()
+      data.append('token',token)
+      axios({
+        method: 'POST',
+        url: 'http://EC2Co-EcsEl-5OOEYFX1RC2G-22735838.us-east-2.elb.amazonaws.com:4200/mostraradm',
+        data: data
+    }).then(result=>{
+        if(result.status===200){
+        setProductos(result.data)
+         }else{
+           alert('debe autenticarse nuevamente')
+           window.location.href = '/login';
+         }
+      }      
+      ).catch(console.log)
+    },[productos.length]);
   return (
     <div>
       <Menuadm/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
       <br/>
       <div className={classes.contenedor}>
       <Link to="/nuevo" className={classes.linki}>
@@ -110,7 +136,7 @@ function Admin_Productos() {
         <br/>
             <div style={{ height: 450, width: 1100 }}>
                 <DataGrid 
-                rows={rows} 
+                rows={productos} 
                 columns={columns} 
                 pageSize={10} 
                 Button
